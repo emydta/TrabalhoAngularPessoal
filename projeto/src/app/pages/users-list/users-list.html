@@ -1,0 +1,11 @@
+<h2>Lista de usuários</h2>
+
+@if(loading){
+  <div>Loading...</div>
+}
+@else if (!loading && !erro){
+  {{usuarios}}
+}
+@else{
+  <h2>erro.</h2>
+}

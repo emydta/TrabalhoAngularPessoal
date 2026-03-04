@@ -1,0 +1,16 @@
+<h2>Detalhe do Usuário</h2>
+
+<p *ngIf="loading">Carregando...</p>
+<p *ngIf="erro">Erro ao buscar usuário.</p>
+<p *ngIf="idInvalido">ID inválido.</p>
+
+<div *ngIf="usuario">
+<p><strong>Nome:</strong> {{ usuario.id }}</p>
+<!--
+<p><strong>Email:</strong> {{ usuario!.email }}</p>
+<p><strong>Telefone:</strong> {{ usuario!.phone }}</p>
+<p><strong>Website:</strong> {{ usuario!.website }}</p>
+<p><strong>Cidade:</strong> {{ usuario!.address?.city }}</p>
+<p><strong>Empresa:</strong> {{ usuario!.company?.name }}1</p>
+-->
+</div>
