@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -12,14 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class UsersDetail implements OnInit{
 
-  usuario!: User;
-  loading = false;
-  erro = false;
+  usuario?: User;
+  loading = true;
   idInvalido = false;
 
   constructor(
     private route: ActivatedRoute,
-    private UserService: UserService
+    private UserService: UserService,
+    private cdr: ChangeDetectorRef
   ) {}
 
 
@@ -34,15 +34,22 @@ export class UsersDetail implements OnInit{
           return;
         }
 
-        this.UserService.buscarUsuarioPorId(id).subscribe(
-          (dados) => {
+        this.UserService.buscarUsuarioPorId(id).subscribe({
+          next: (dados) => {
             this.usuario = dados;
             this.loading = false;
-          })
+            console.log(this.usuario)
+            this.cdr.detectChanges();
+          },
+          error: () => {
+            console.log(this.idInvalido)
+            this.idInvalido = true;
+            this.loading = false;
+          }
+        });
 
-      })
-  }
+    });
 
 }
 
-
+}

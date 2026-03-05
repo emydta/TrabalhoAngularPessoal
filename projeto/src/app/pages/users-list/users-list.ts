@@ -19,11 +19,20 @@ export class UsersList implements OnInit {
   constructor(private userService: UserService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-      this.userService.listarUsuarios().subscribe(
-      dados => {
+      this.userService.listarUsuarios().subscribe({
+        // next recebe os usuários e executa o bloco de dentro caso dê certo
+      next: (dados) => {
         this.usuarios = dados;
+        this.loading = false;
         console.log(this.usuarios)
         this.cdr.detectChanges();
+      },
+      //error vai marcar o erro como true, e executando ele
+      error: (err) => {
+        this.erro = true;
+        this.loading = false;
+        this.cdr.detectChanges();
+        }
       });
 
   }

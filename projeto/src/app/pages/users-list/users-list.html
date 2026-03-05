@@ -4,7 +4,19 @@
   <div>Loading...</div>
 }
 @else if (!loading && !erro){
-  {{usuarios}}
+  @for (user of usuarios; track user.id) {
+
+    <hr>
+    <div class="card">
+        <h3 class="nome">{{ user.name }}</h3>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Telefone:</strong> {{ user.phone }}</p>
+        <p><strong>Website:</strong> {{ user.website }}</p>
+        <p><strong>Cidade:</strong> {{ user.address?.city }}</p>
+        <p><strong>Empresa:</strong> {{ user.company?.name }}</p>
+      </div>
+
+  }
 }
 @else{
   <h2>erro.</h2>
